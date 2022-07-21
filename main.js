@@ -31,15 +31,44 @@ operatorBtn.forEach((button) =>
 
 
 function getNumber(number) {
+    if (currentDisplay == '0' || shouldResetScreen) {
+        resetDisplay();
+        currentDisplay.textContent += number;
+    }
+}
 
+function resetDisplay() {
+    currentDisplay.textContent = '';
+    shouldResetScreen = false;
 }
 
 function getOperator(operator) {
-    if (currentOperation !== null) evaluate()
-    firstOperand = currentDisplay.textContent
-    currentOperation = operator
-    oldDisplay.textContent = `${firstOperand} ${currentOperation}`
-    shouldResetScreen = true
+    if (currentOperation !== null) operationResult();
+    leftOperand = currentDisplay.textContent;
+    currentOperation = operator;
+    oldDisplay.textContent = `${firstOperand} ${currentOperation}`;
+    shouldResetScreen = true;
+}
+
+function clearAll() {
+    currentDisplay.textContent = '0';
+    oldDisplay.textContent = '';
+    leftOperand = '';
+    righOperand = '';
+    currentOperation = null;
+}
+
+function deleteOne() {
+    currentDisplay.textContent = currentDisplay.textContent.toString().slice(0, -1);
+}
+
+function operationResult() {
+    /*when should return screen true, run code below*/
+    if (shouldResetScreen || currentOperation == null) return
+    if (currentOperation == '÷' && currentDisplay == '0') {
+        return 'Cannot divide by 0'
+    }
+    righOperand =
 }
 
 const add = function(a, b) {
