@@ -13,7 +13,7 @@ const oldDisplay = document.getElementById('queueDisplay');
 const currentDisplay = document.getElementById('currentDisplay');
 
 resultBtn.addEventListener('click', operationResult);
-// decimalBtn.addEventListener('click', pointDecimal);
+decimalBtn.addEventListener('click', pointDecimal)
 clearBtn.addEventListener('click', clearAll);
 backspaceBtn.addEventListener('click', deleteOne);
 
@@ -53,6 +53,15 @@ function getOperator(operator) {
     currentDisplay.textContent = '0';
 }
 
+function pointDecimal() {
+    if (shouldResetScreen) clearAll();
+    if (currentDisplay.textContent == '') {
+        currentDisplay.textContent = '0'}
+    if (currentDisplay.textContent.includes == ('.')) {return}
+    currentDisplay.textContent += '.';
+
+}
+
 function clearAll() {
     currentDisplay.textContent = '0';
     oldDisplay.textContent = '';
@@ -72,10 +81,9 @@ function operationResult() {
         alert('Cannot divide by 0');
         return
     }
-
     righOperand = currentDisplay.textContent;
     currentDisplay.textContent = roundResult(formula(currentOperation, leftOperand, righOperand));
-    oldDisplay,textContent = `${leftOperand} ${currentOperation} ${righOperand} =`;
+    oldDisplay.textContent = `${leftOperand} ${currentOperation} ${righOperand} =`;
     currentOperation = null;
 }
 
@@ -87,7 +95,7 @@ function add(a, b) {
     return a + b;
   };
   
-function subtract(a, b) {
+function substract(a, b) {
       return a - b;
   };
   
@@ -99,20 +107,41 @@ function divide(a, b) {
     return a / b;
 };
 
-  function formula(operator, a, b) {
+function formula(operator, a, b) {
     a = Number(a);
     b = Number(b);
-    switch (operator) {
-        case '+':
-          return add(a, b)
-        case '−':
-          return substract(a, b)
-        case '×':
-          return multiply(a, b)
-        case '÷':
-          if (b === 0) return null
-          else return divide(a, b)
-        default:
-          return null
-      }
+    if (operator == '+') {
+        return add(a,b);
     }
+    else if (operator == '-') {
+        return substract(a,b);
+    }
+    else if (operator == 'x') {
+        return multiply(a,b);
+    }
+    else if (operator == '÷') {
+        if (b == '0') {
+            return null
+        }
+        else {
+            return divide(a,b);
+        }
+    }
+    else {
+        return null;
+    }
+        // switch (operator) {
+    //     case '+':
+    //       return add(a, b)
+    //     case '-':
+    //       return substract(a, b)
+    //     case 'x':
+    //       return multiply(a, b)
+    //     case '÷':
+    //       if (b === 0) return null
+    //       else return divide(a, b)
+    //     default:
+    //       return null
+    //   }
+    }
+
