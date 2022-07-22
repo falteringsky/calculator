@@ -13,7 +13,7 @@ const oldDisplay = document.getElementById('queueDisplay');
 const currentDisplay = document.getElementById('currentDisplay');
 
 resultBtn.addEventListener('click', operationResult);
-decimalBtn.addEventListener('click', pointDecimal);
+// decimalBtn.addEventListener('click', pointDecimal);
 clearBtn.addEventListener('click', clearAll);
 backspaceBtn.addEventListener('click', deleteOne);
 
@@ -31,10 +31,12 @@ operatorBtn.forEach((button) =>
 
 
 function getNumber(number) {
-    if (currentDisplay == '0' || shouldResetScreen) {
+    /*when shouldresetscreen true, run code below*/
+    if (currentDisplay.textContent == '0' || shouldResetScreen) {
         resetDisplay();
-        currentDisplay.textContent += number;
     }
+    currentDisplay.textContent += number;
+     
 }
 
 function resetDisplay() {
@@ -46,8 +48,9 @@ function getOperator(operator) {
     if (currentOperation !== null) operationResult();
     leftOperand = currentDisplay.textContent;
     currentOperation = operator;
-    oldDisplay.textContent = `${firstOperand} ${currentOperation}`;
+    oldDisplay.textContent = `${leftOperand} ${currentOperation}`;
     shouldResetScreen = true;
+    currentDisplay.textContent = '0';
 }
 
 function clearAll() {
@@ -63,52 +66,53 @@ function deleteOne() {
 }
 
 function operationResult() {
-    /*when should return screen true, run code below*/
+    /*when shouldresetscreen true, run code below*/
     if (shouldResetScreen || currentOperation == null) return
-    if (currentOperation == '÷' && currentDisplay == '0') {
-        return 'Cannot divide by 0'
+    if (currentOperation == '÷' && currentDisplay.textContent == '0') {
+        alert('Cannot divide by 0');
+        return
     }
-    righOperand =
+
+    righOperand = currentDisplay.textContent;
+    currentDisplay.textContent = roundResult(formula(currentOperation, leftOperand, righOperand));
+    oldDisplay,textContent = `${leftOperand} ${currentOperation} ${righOperand} =`;
+    currentOperation = null;
 }
 
-const add = function(a, b) {
+function roundResult(number) {
+    return Math.round(number * 1000) / 1000;
+}
+
+function add(a, b) {
     return a + b;
   };
   
-const subtract = function(a, b) {
+function subtract(a, b) {
       return a - b;
   };
   
-const multiply = function(a, b) {
+function multiply(a, b) {
     return a * b;
   };
 
-const divide = function(a, b) {
+function divide(a, b) {
     return a / b;
 };
 
   function formula(operator, a, b) {
-    a = number(a);
-    b = number(b);
-
-    if (operator == '+') {
-        return add(a, b)
+    a = Number(a);
+    b = Number(b);
+    switch (operator) {
+        case '+':
+          return add(a, b)
+        case '−':
+          return substract(a, b)
+        case '×':
+          return multiply(a, b)
+        case '÷':
+          if (b === 0) return null
+          else return divide(a, b)
+        default:
+          return null
+      }
     }
-    if (operator == '-') {
-        return subtract(a, b)
-    }    
-    if (operator == 'x') {
-        return multiply(a, b)
-    }
-    if (operator == '÷') {
-        if(b == 0) {
-            return null
-        }
-        else {
-        return divide(a, b)
-        }
-    }
-    else {
-        return null
-    }
-  }
