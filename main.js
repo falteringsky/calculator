@@ -12,6 +12,7 @@ const backspaceBtn = document.getElementById('backspaceBtn');
 const oldDisplay = document.getElementById('queueDisplay');
 const currentDisplay = document.getElementById('currentDisplay');
 
+window.addEventListener('keydown', keyboardInput)
 resultBtn.addEventListener('click', operationResult);
 decimalBtn.addEventListener('click', pointDecimal)
 clearBtn.addEventListener('click', clearAll);
@@ -145,3 +146,19 @@ function formula(operator, a, b) {
     //   }
     }
 
+    function keyboardInput(e) {
+        if (e.key >= 0 && e.key <= 9) getNumber(e.key);
+        if (e.key === '.') pointDecimal();
+        if (e.key === '=' || e.key === 'Enter') operationResult();
+        if (e.key === 'Backspace') deleteOne();
+        if (e.key === 'Escape') clearAll();
+        if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/')
+          getOperator(convertOperator(e.key));
+      }
+      
+      function convertOperator(keyboardOperator) {
+        if (keyboardOperator === '/') return '÷';
+        if (keyboardOperator === '*') return 'x';
+        if (keyboardOperator === '-') return '-';
+        if (keyboardOperator === '+') return '+';
+      }
