@@ -7,22 +7,153 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: blue;
+    background: url(./images/red-blackPreloader.jpg);
     position: relative;
     min-height: 100vh;
 }
 
 .calculator {
-    background-color:  yellow;
-    height: 250px;
-    width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: black;
+    height: 550px;
+    width: 450px;
+    clip-path: polygon(
+    0 10%,
+    10% 0,
+    90% 0,
+    100% 10%,
+    100% 90%,
+    90% 100%,
+    10% 100%,
+    0% 90%,
+    0% 10%
+  )
 }
 
-.footer {
+.display {
+    background-color: #00f0ff;
+    height: 150px;
+    width: 380px;
+    clip-path: polygon(
+    0 20%,
+    10% 0,
+    90% 0,
+    100% 20%,
+    100% 80%,
+    90% 100%,
+    10% 100%,
+    0% 80%,
+    0% 20%
+  );
+    text-align: right;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+#queueDisplay {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 5px;
+    min-height: 60px;
+    font-size: 22px;
+}
+
+#currentDisplay {
+    font-size: 40px;
+    min-height: 65px;
+    padding: 5px;
+}
+
+.contentCalc {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 350px;
+    width: 360px;
+    background-color: yellow;
+}
+
+.topBtn {
+    height: 100px;
+    width: 350px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+.numbersBtn {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    height: 250px;
+     width: 350px;
+}
+
+.generalBtn {
+    width: 70px;
+    height: 60px;
+    background-color: red;
+    color: black;
+    border: 4px solid black;
+    border-radius:10px;
+    padding: 10px 25px;
+    font-size: 25px;
+    font-family: tahoma;
+    margin: 0.5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .generalBtn:hover {
+    color: black;
+    background-color: #db3eb1;
+    filter: drop-shadow(0 0 10px #db3eb1) contrast(2) brightness(1);
+  }
+
+  .bigBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90px;
+    width: 160px;
+    background-color: white;
+    color: black;
+    border: 6px solid black;
+    border-radius:10px;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-family: tahoma;
+    letter-spacing: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    /* filter: drop-shadow(0 0 10px red) drop-shadow(0 0 40px red) contrast(1) brightness(1);
+    transition: .2s; */
+  }
+
+  .bigBtn:hover {
+    color: black;
+    background-color: #0FFF50;
+    filter: drop-shadow(0 0 10px #db3eb1) contrast(2) brightness(1);
+  }
+
+  .footer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    font-weight: bold;
+    font-style: italic;
     color: yellow;
     background-color: black;
     position: absolute;
     bottom: 0;
-    width: 100%;
+    width: 96%;
     height: 2.5rem
 }
